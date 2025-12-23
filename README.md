@@ -414,7 +414,7 @@ The interface provides:
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 [Rest of your architecture section...]
 
 ##  Development
@@ -579,7 +579,7 @@ safety-critical operations.
 - Novel applications of AI in nuclear regulatory compliance
 
 **Connect:**
--  LinkedIn: [\[Add your LinkedIn URL here\]](https://www.linkedin.com/in/shahbaaz-syed/)
+-  LinkedIn: [\[Syed Shahbaaz\]](https://www.linkedin.com/in/shahbaaz-syed/)
 -  Email: syedshahbaaz1970@gmail.com
 -  GitHub: [@SyedShahbaaz02](https://github.com/SyedShahbaaz02)
 
@@ -629,9 +629,7 @@ Potential areas for expansion and improvement:
 For questions, feedback, or collaboration opportunities:
 
 -  Email: Syedshahbaaz1970@gmail.com
--  LinkedIn: [\[Add your LinkedIn\]](https://www.linkedin.com/in/shahbaaz-syed/)
--  GitHub Issues: [Open an Issue](https://github.com/SyedShahbaaz02/Nuclear-AI-Assistant/issues)
-
+-  LinkedIn: [\[Syed Shahbaaz\]](https://www.linkedin.com/in/shahbaaz-syed/)
 ---
 
 ##  Quick Reference Links
