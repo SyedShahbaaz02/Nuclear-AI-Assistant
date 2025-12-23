@@ -1,0 +1,206 @@
+# CD Pipeline
+# Deploys the Azure resources using Bicep and configures them using Python
+
+# You must link this pipeline to a variable group in Azure DevOps that provides the necessary variables and secrets.
+
+trigger: none
+name: continuous_deployment_pipeline
+
+stages:
+  - stage: DeployBicep
+    displayName: Deploy Infrastructure Bicep
+
+    jobs:
+    - job: deploy_to_azure
+      displayName: Deploy Azure Resources
+      pool:
+        vmImage: ubuntu-latest
+
+      steps:
+      - task: AzureCLI@2
+        displayName: Bicep Deployment
+        inputs:
+           azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+           scriptType: bash
+           scriptLocation: inlineScript
+           inlineScript: |
+                az deployment group create \
+                    --resource-group $(RESOURCE_GROUP_NAME) \
+                    --name $(TARGET_ENVIRONMENT)_deployment_$(Build.BuildId) \
+                    --template-file ./infra/main.bicep \
+                    --parameters ./infra/$(TARGET_ENVIRONMENT).bicepparam
+
+  - stage: DeployWebApp
+    displayName: Deploy Web Application
+    dependsOn: DeployBicep
+
+    jobs:
+    - job: deploy_web_api_code
+      displayName: Deploy Web API Code
+      pool:
+          vmImage: ubuntu-latest
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.11'
+          addToPath: true
+          architecture: 'x64'
+      - task: ArchiveFiles@2
+        displayName: 'Archive Web API for deployment'
+        inputs:
+          rootFolderOrFile: 'src/web_api'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/web_api.zip'
+          replaceExistingArchive: true
+      - task: AzureWebApp@1
+        displayName: 'Deploy Web API to Azure Web App'
+        inputs:
+          azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+          appType: webAppLinux
+          appName: $(STREAMING_WEB_APP_NAME_CURRENT)
+          package: '$(Build.ArtifactStagingDirectory)/web_api.zip'
+          runtimeStack: 'PYTHON|3.11'
+          startUpCommand: 'gunicorn -w 5 --timeout 600 -k uvicorn.workers.UvicornWorker main:app'
+    #   - script: sleep $(WEB_APP_POST_DEPLOYMENT_DELAY_MINS)m
+        # displayName: 'Pause for Web App to stabilize'
+
+
+
+  - stage: ConfigureResources
+    displayName: Configure Azure Resources
+    dependsOn: DeployWebApp
+
+    jobs:
+    - job: configure_resources
+      displayName: Configure Azure Resources1
+      pool:
+          vmImage: ubuntu-latest
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.11'
+          addToPath: true
+          architecture: 'x64'
+      - task: AzureCLI@2
+        displayName: Configure Resources
+        env:
+            AI_SEARCH_ENDPOINT: $(AI_SEARCH_ENDPOINT)
+            AI_SEARCH_NAME: $(AI_SEARCH_NAME)
+            AZURE_BLOB_CONNECTION_STRING: $(AZURE_BLOB_CONNECTION_STRING)
+            AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+            OPENAI_ADA_DEPLOYMENT_ID: $(OPENAI_ADA_DEPLOYMENT_ID)
+            OPEN_ADA_LARGE_DEPLOYMENT_ID: $(OPEN_ADA_LARGE_DEPLOYMENT_ID)
+            OPENAI_API_KEY: $(OPENAI_API_KEY)
+            OPENAI_ENDPOINT: $(OPENAI_ENDPOINT)
+            RESOURCE_GROUP_NAME: $(RESOURCE_GROUP_NAME)
+            STORAGE_ACCOUNT_NAME: $(STORAGE_ACCOUNT_NAME)
+            WEBAPP_NAME: $(STREAMING_WEB_APP_NAME_CURRENT)
+            TARGET_ENVIRONMENT: $(TARGET_ENVIRONMENT)
+        inputs:
+            azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              cd infra/config
+              pip install -r requirements.txt
+              python configure.py
+     # - script: sleep $(CONFIGURE_RESOURCES_POST_DEPLOYMENT_DELAY_MINS)m
+     #   displayName: 'Pause for resource configuration to complete'
+
+  - stage: DeployWebApp1
+    displayName: Deploy Web Application 1
+    dependsOn: ConfigureResources
+
+    jobs:
+    - job: deploy_web_api_code
+      displayName: Deploy Web API Code
+      # environment: ALCSProd
+      pool:
+          name: CC-Azure-Green-Pool
+      steps:
+      - task: ArchiveFiles@2
+        displayName: 'Archive Web API for deployment'
+        inputs:
+          rootFolderOrFile: 'src/web_api'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/web_api.zip'
+          replaceExistingArchive: true
+      - task: AzureWebApp@1
+        displayName: 'Deploy Web API to Azure Web App'
+        inputs:
+          azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+          appType: webAppLinux
+          appName: $(STREAMING_WEB_APP_NAME)
+          package: '$(Build.ArtifactStagingDirectory)/web_api.zip'
+          runtimeStack: 'PYTHON|3.11'
+          startUpCommand: 'gunicorn -w 5 --timeout 600 -k uvicorn.workers.UvicornWorker main:app'
+    #   - script: sleep $(WEB_APP_POST_DEPLOYMENT_DELAY_MINS)m
+        # displayName: 'Pause for Web App to stabilize'
+
+  - stage: ConfigureResources1
+    displayName: Configure Azure Resources
+    dependsOn: DeployWebApp1
+
+    jobs:
+    - job: configure_resources1
+      displayName: Configure Azure Resources1
+      pool:
+          vmImage: ubuntu-latest
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.11'
+          addToPath: true
+          architecture: 'x64'
+      - task: AzureCLI@2
+        displayName: Configure Resources
+        env:
+            AI_SEARCH_ENDPOINT: $(AI_SEARCH_ENDPOINT)
+            AI_SEARCH_NAME: $(AI_SEARCH_NAME)
+            AZURE_BLOB_CONNECTION_STRING: $(AZURE_BLOB_CONNECTION_STRING)
+            AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+            OPENAI_ADA_DEPLOYMENT_ID: $(OPENAI_ADA_DEPLOYMENT_ID)
+            OPEN_ADA_LARGE_DEPLOYMENT_ID: $(OPEN_ADA_LARGE_DEPLOYMENT_ID)
+            OPENAI_API_KEY: $(OPENAI_API_KEY)
+            OPENAI_ENDPOINT: $(OPENAI_ENDPOINT)
+            RESOURCE_GROUP_NAME: $(RESOURCE_GROUP_NAME)
+            STORAGE_ACCOUNT_NAME: $(STORAGE_ACCOUNT_NAME)
+            WEBAPP_NAME: $(STREAMING_WEB_APP_NAME)
+            TARGET_ENVIRONMENT: $(TARGET_ENVIRONMENT)
+        inputs:
+            azureSubscription: $(AZURE_SERVICE_CONNECTION_NAME)
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              cd infra/config
+              pip install -r requirements.txt
+              python configure.py
+     # - script: sleep $(CONFIGURE_RESOURCES_POST_DEPLOYMENT_DELAY_MINS)m
+     #   displayName: 'Pause for resource configuration to complete'
+
+
+  - stage: Test
+    condition: "false"
+    displayName: Run Tests
+    dependsOn: ConfigureResources1
+
+    jobs:
+    - job: run_smoke_tests
+      displayName: Run Smoke Tests
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.11'
+            addToPath: true
+            architecture: 'x64'
+        - script: |
+            cd ./src/web_api/tests/integration
+            pip install -r requirements.txt
+            pytest -m smoke test_deployed_chat_stream.py
+          displayName: 'Run Smoke Tests'
+          env:
+            CHAT_API_BASE_URL: "https://$(STREAMING_WEB_APP_NAME).$(APP_SERVICE_ENVIRONMENT).appserviceenvironment.us"

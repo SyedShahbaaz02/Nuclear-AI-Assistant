@@ -1,0 +1,17 @@
+{
+    "name": "nureg-datasource",
+    "description": "Nureg is a data source for the NUREG series of reports published by the U.S. Nuclear Regulatory Commission (NRC). These reports cover a wide range of topics related to nuclear power plants, including safety, regulations, and technical specifications.",
+    "type": "azureblob",
+    "subtype": null,
+    "credentials": {
+        "connectionString": "<connectionString>"
+    },
+    "container": {
+        "name": "non-eci",
+        "query": "nureg"
+    },
+    "dataChangeDetectionPolicy": null,
+    "dataDeletionDetectionPolicy": null,
+    "encryptionKey": null,
+    "identity": null
+}

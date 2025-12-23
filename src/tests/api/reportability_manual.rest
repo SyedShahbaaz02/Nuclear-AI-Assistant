@@ -1,0 +1,13 @@
+POST http://localhost:7071/search/reportability_manual/data:generate HTTP/1.1
+content-type: application/json
+
+{
+  "values": [
+    {
+      "data": {
+        "path": "https://czvgnalcs00dsta001.blob.core.usgovcloudapi.net/eci/reportability_guide/413 -518 pp SECURITY (SEC) LS-AA-1130, Rev 022, RM.pdf",
+        "recordId": "1"
+      }
+    }
+  ]
+}

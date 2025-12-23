@@ -1,0 +1,16 @@
+
+trigger: none
+name: pr_validation_pipeline
+jobs:
+- job: markdown_lint
+  displayName: "Run Markdown Lint"
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+  - script: |
+      npm install -g markdownlint-cli
+      markdownlint "**/*.md" --config "$(System.DefaultWorkingDirectory)/.markdownlint.json"
+    displayName: "Run markdownlint"

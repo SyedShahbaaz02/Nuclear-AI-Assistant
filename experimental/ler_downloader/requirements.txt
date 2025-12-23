@@ -1,0 +1,9 @@
+dotenv==0.9.9
+openai==1.76.2
+pandas==2.2.2
+azure-ai-documentintelligence==1.0.2
+azure-common==1.1.28
+azure-core==1.33.0
+azure-identity==1.21.0
+azure-search-documents==11.5.2
+azure-storage-blob==12.25.1

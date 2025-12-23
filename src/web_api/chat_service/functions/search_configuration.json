@@ -1,0 +1,47 @@
+{
+    "nureg": {
+        "index_name_setting": "AZURE_SEARCH_NUREG_INDEX_NAME",
+        "search_type": "Vector",
+        "k_nearest_neighbors": 7,
+        "top": 5,
+        "search_fields": ["discussion"],
+        "select_fields": ["id", "section", "lxxii", "lxxiii",
+                "description", "discussion", "storageAccountName",
+                "containerName", "blobName","pageNumber", "examples"],
+
+        "vector_fields": "discussionVector",
+        "threshold": 0.5
+    },
+    "reportability_manual": {
+        "index_name_setting": "AZURE_SEARCH_REPORTABILITY_MANUAL_INDEX_NAME",
+        "search_type": "Vector",
+        "k_nearest_neighbors": 4,
+        "top": 3,
+        "search_fields": ["discussion", "referenceContent"],
+        "select_fields": ["id", "sectionName", "references", "referenceContent",
+                "requiredNotifications", "requiredWrittenReports", "discussion", "storageAccountName",
+                "containerName", "blobName", "pageNumber"],
+        "vector_fields": "discussionVector",
+        "threshold": 0.1
+    },
+    "ts_naive_search": {
+        "index_name_setting": "AZURE_SEARCH_TECHSPEC_INDEX_NAME",
+        "search_type": "Vector",
+        "k_nearest_neighbors": 4,
+        "top": 10,
+        "search_fields": ["content"],
+        "select_fields": ["chunk_id", "title", "url", "content"],
+        "vector_fields": "contentVector",
+        "threshold": 0.0
+    },
+    "ufsar_naive_search": {
+        "index_name_setting": "AZURE_SEARCH_UFSAR_INDEX_NAME",
+        "search_type": "Vector",
+        "k_nearest_neighbors": 4,
+        "top": 10,
+        "search_fields": ["content"],
+        "select_fields": ["chunk_id", "title", "url", "content"],
+        "vector_fields": "contentVector",
+        "threshold": 0.0
+    }
+}

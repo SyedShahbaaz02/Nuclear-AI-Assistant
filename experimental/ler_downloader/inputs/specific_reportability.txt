@@ -1,0 +1,18 @@
+You are going to receive an excerpt text from a report containing a detailed description of an incident that occured
+in a nuclear plant.
+
+You will need to determine if the event is relevant to the following piece of regulation, in order to submit an LER(Licensee Event Report) to the NRC (Nuclear Regulatory Commission)
+You will need to only rely on the information about the event and the excerpt of the regulatory text below (description, discussion and examples),
+along with the provided examples, and nothing else.
+
+Description: {section_description}
+
+Discussion: {section_discussion}
+
+Examples: {section_examples}
+
+
+
+Answer in JSON format. The keys should be "answer" and "rationale" and nothing else, Example of expected result attached below:
+"answer": YES or NO
+"rationale": A single sentence explanation why this event is reportable and how the regulatory text given is relevant

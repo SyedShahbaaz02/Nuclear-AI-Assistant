@@ -1,0 +1,24 @@
+.message {
+  display: flex;
+  align-items: left;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  flex-direction: column;
+}
+
+.message.ai {
+  align-self: flex-start;
+  background-color: black;
+  color: #01ac0a
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: #01ac0a;
+  color: black
+}
+
+.hidden {
+  display: none;
+}

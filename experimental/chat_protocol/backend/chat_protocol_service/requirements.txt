@@ -1,0 +1,6 @@
+openai
+quart[dotenv]
+quart-cors
+azure-identity
+pydantic
+pysignalr

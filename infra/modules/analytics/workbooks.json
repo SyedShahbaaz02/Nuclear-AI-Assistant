@@ -1,0 +1,315 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "## Ask Licensing Notebook\n---\n\nThe purpose of this workbook is to provide an overview of various different metrics that are important."
+      },
+      "name": "text - 2"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 11,
+            "content": {
+              "version": "LinkItem/1.0",
+              "style": "bullets",
+              "links": []
+            },
+            "name": "links - 0"
+          },
+          {
+            "type": 11,
+            "content": {
+              "version": "LinkItem/1.0",
+              "style": "tabs",
+              "links": [
+                {
+                  "id": "943c9462-7580-4227-9942-f1763983b6d6",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Dashboard",
+                  "subTarget": "Dashboard",
+                  "style": "link"
+                },
+                {
+                  "id": "34e78551-18b1-4310-9e8f-956c273e8f77",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Logs",
+                  "subTarget": "Logs",
+                  "style": "link"
+                }
+              ]
+            },
+            "name": "links - 1"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbookc14be4ef-359b-4706-8f18-2ac07be25b75",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.insights/components",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.Insights/components/CZV-G-N-ALCS00-D-AIS-01"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.insights/components",
+                  "metric": "microsoft.insights/components-Failures-exceptions/count",
+                  "aggregation": 7
+                }
+              ],
+              "title": "Exceptions",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 3"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "dependencies\r\n| join traces on operation_Id\r\n| where resultCode  == \"429\"\r\n| project timestamp, id, operation_Id, resultCode, success, message, name",
+              "size": 0,
+              "title": "429 Exceptions",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.insights/components"
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Logs"
+            },
+            "name": "query - 3"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbookceae84d1-0742-44c1-af36-42379e4a4541",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.insights/components",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.Insights/components/CZV-G-N-ALCS00-D-AIS-01"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.insights/components",
+                  "metric": "microsoft.insights/components-Failures-requests/failed",
+                  "aggregation": 7
+                }
+              ],
+              "title": "Failed Requests",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 6"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "traces",
+              "size": 0,
+              "title": "Traces",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "queryType": 0,
+              "resourceType": "microsoft.insights/components"
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Logs"
+            },
+            "name": "query - 5"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbook836b6d55-bc55-410f-bd28-1e3415792e21",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.cognitiveservices/accounts",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.CognitiveServices/accounts/CZV-G-N-ALCS00-D-OAI-02"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.cognitiveservices/accounts",
+                  "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                  "aggregation": 1,
+                  "splitBy": [
+                    "ModelName",
+                    "StatusCode"
+                  ]
+                }
+              ],
+              "title": "OAI Request",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 9"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbooke81a80b2-b134-4caf-87cc-315299da14d4",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 3,
+              "resourceType": "microsoft.cognitiveservices/accounts",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.CognitiveServices/accounts/CZV-G-N-ALCS00-D-OAI-02"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.cognitiveservices/accounts",
+                  "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-ProcessedPromptTokens",
+                  "aggregation": 1
+                }
+              ],
+              "title": "Processed Prompt Token",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 9"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbook34c14499-c9b7-4f88-9b0b-83b9942989aa",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 3,
+              "resourceType": "microsoft.cognitiveservices/accounts",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.CognitiveServices/accounts/CZV-G-N-ALCS00-D-OAI-02"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.cognitiveservices/accounts",
+                  "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-GeneratedTokens",
+                  "aggregation": 1,
+                  "splitBy": [
+                    "FeatureName"
+                  ]
+                }
+              ],
+              "title": "Generated Completion Tokens",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 10"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbooka08eba78-fc45-40bf-aef8-ed071f9125b8",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.cognitiveservices/accounts",
+              "metricScope": 0,
+              "resourceIds": [
+                "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/Microsoft.CognitiveServices/accounts/CZV-G-N-ALCS00-D-OAI-02"
+              ],
+              "timeContext": {
+                "durationMs": 3600000
+              },
+              "metrics": [
+                {
+                  "namespace": "microsoft.cognitiveservices/accounts",
+                  "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIAvailabilityRate",
+                  "aggregation": 4,
+                  "splitBy": [
+                    "ModelName"
+                  ]
+                }
+              ],
+              "title": "Availibility",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Dashboard"
+            },
+            "name": "metric - 11"
+          }
+        ]
+      },
+      "name": "group - 1"
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/e36c3be6-c325-4f1b-8c73-3afe998578b8/resourceGroups/CZV-G-N-ALCS00-D-RGP-06/providers/microsoft.insights/components/CZV-G-N-ALCS00-D-AIS-01"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}

@@ -1,0 +1,8 @@
+You are going to receive an excerpt text from a report containing a detailed description of an incident that occured
+in a nuclear plant.
+Determine if it needs to be reported to the Nuclear Regulatory Commission (NRC) under rule 10 CFR 50.73
+Answer in the following format:
+
+1. YES or NO
+2. If YES, then under which section of 10 CFR 50.73
+3. If YES, then provide an explanation

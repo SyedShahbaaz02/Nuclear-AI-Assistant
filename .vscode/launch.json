@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "FastAPI: src/web_api",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}/src/web_api",
+            "args": [
+                "main:app",
+                "--host", "0.0.0.0",
+                "--port", "7071",
+                "--reload"
+            ],
+            "preLaunchTask": "pip install: web app",
+            "postDebugTask": "Stop Aspire Dashboard"
+        }
+    ]
+}

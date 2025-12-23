@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+  background-color: black;
+  color: #01ac0a;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+  /* Dark background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #01ac0a;
+  /* Bright green for the thumb */
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #03ff0f;
+  /* Lighter green on hover */
+}
+
+::-webkit-scrollbar-corner {
+  background: black;
+  /* Match the track background */
+}

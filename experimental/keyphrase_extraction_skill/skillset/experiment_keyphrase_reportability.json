@@ -1,0 +1,143 @@
+{
+    "name": "keyphrase-experiment-reportability-manual-skillset",
+    "description": "Experiment skillset for reportability-manual",
+    "skills": [
+        {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "uri": "https://<webAppName>.azurewebsites.us/search/reportability_manual/data:generate",
+            "description": "This skill calls an Azure web app, which in turn calls custom code",
+            "inputs": [
+                {
+                    "name": "path",
+                    "source": "/document/metadata_storage_path"
+                },
+                {
+                    "name": "recordID",
+                    "source": "/document/metadata_storage_name"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "sections",
+                    "targetName": "sections"
+                }
+            ]
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+            "name": "discussionEmbedding",
+            "description": "Generates embeddings for the text from a deployed embedding model.",
+            "context": "/document/sections/*",
+            "resourceUri": "<openaiResourceUri>",
+            "apiKey": "<openaiApiKey>",
+            "deploymentId": "<openaiAdaLargeDeploymentId>",
+            "dimensions": 3072,
+            "modelName": "text-embedding-3-large",
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/sections/*/discussion",
+                    "inputs": []
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "embedding",
+                    "targetName": "discussionVector"
+                }
+            ]
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+            "description": "Extracts key phrases from discussion field per section.",
+            "context": "/document/sections/*",
+            "name": "keyPhraseExtraction",
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/sections/*/discussion"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "keyPhrases",
+                    "targetName": "discussionKeyPhrases"
+                }
+            ]
+        }
+    ],
+    "indexProjections": {
+        "selectors": [
+            {
+                "targetIndexName": "keyphrase-experiment-reportability-manual-index",
+                "parentKeyFieldName": "parent_id",
+                "sourceContext": "/document/sections/*",
+                "mappings": [
+                    {
+                        "name": "sectionName",
+                        "source": "/document/sections/*/sectionName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "references",
+                        "source": "/document/sections/*/references",
+                        "inputs": []
+                    },
+                    {
+                        "name": "referenceContent",
+                        "source": "/document/sections/*/referenceContent",
+                        "inputs": []
+                    },
+                    {
+                        "name": "requiredNotifications",
+                        "source": "/document/sections/*/requiredNotifications",
+                        "inputs": []
+                    },
+                    {
+                        "name": "requiredWrittenReports",
+                        "source": "/document/sections/*/requiredWrittenReports",
+                        "inputs": []
+                    },
+                    {
+                        "name": "discussion",
+                        "source": "/document/sections/*/discussion",
+                        "inputs": []
+                    },
+                    {
+                        "name": "discussionVector",
+                        "source": "/document/sections/*/discussionVector",
+                        "inputs": []
+                    },
+                    {
+                        "name": "storageAccountName",
+                        "source": "/document/sections/*/storageAccountName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "containerName",
+                        "source": "/document/sections/*/containerName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "blobName",
+                        "source": "/document/sections/*/blobName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "pageNumber",
+                        "source": "/document/sections/*/pageNumber",
+                        "inputs": []
+                    },
+                    {
+                        "name": "discussionKeyPhrases",
+                        "source": "/document/sections/*/discussionKeyPhrases",
+                        "inputs": []
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "projectionMode": "skipIndexingParentDocuments"
+        }
+    }
+}

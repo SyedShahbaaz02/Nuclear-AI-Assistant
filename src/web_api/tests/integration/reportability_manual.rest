@@ -1,0 +1,19 @@
+POST http://localhost:7071/search/reportability_manual/data:generate HTTP/1.1
+content-type: application/json
+
+{
+    "values": [
+        {
+            "recordId": "1",
+            "data": {
+                "path": "https://czvgnalcs00dsta001.blob.core.usgovcloudapi.net/eci/reportability_guide/143-302 SAFETY (SAF) LS-AA-1110, Rev 037, RM.pdf"
+            }
+        },
+        {
+            "recordId": "2",
+            "data": {
+                "path": "https://czvgnalcs00dsta001.blob.core.usgovcloudapi.net/eci/reportability_guide/303-412 pp RADIATION (RAD) LS-AA-1120, Rev 024, RM.pdf"
+            }
+        }
+    ]
+}

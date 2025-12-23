@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "pip install: web app",
+            "command": "pip3 install -r requirements.txt",
+            "options": {
+                "cwd": "${workspaceFolder}/src/web_api/"
+            },
+            "dependsOn": [
+                "Start Aspire Dashboard"
+            ]
+        },
+        {
+            "label": "Start Aspire Dashboard",
+            "type": "docker-run",
+            "dockerRun": {
+                "containerName": "aspire-dashboard",
+                "image": "mcr.microsoft.com/dotnet/aspire-dashboard:9.0",
+                "ports": [
+                    {
+                        "containerPort": 18888,
+                        "hostPort": 18888
+                    },
+                    {
+                        "containerPort": 18889,
+                        "hostPort": 4317
+                    }
+                ],
+                "remove": true,
+                "env": {}
+            },
+            "group": "build"
+        },
+        {
+            "label": "Stop Aspire Dashboard",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "stop",
+                "aspire-dashboard"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

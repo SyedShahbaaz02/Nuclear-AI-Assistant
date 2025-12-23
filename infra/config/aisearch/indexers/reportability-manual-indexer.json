@@ -1,0 +1,23 @@
+{
+    "name": "reportability-manual-indexer",
+    "description": null,
+    "dataSourceName": "reportability-manual-datasource",
+    "skillsetName": "reportability-manual-skillset",
+    "targetIndexName": "reportability-manual-index",
+    "disabled": null,
+    "schedule": null,
+    "parameters": {
+        "batchSize": null,
+        "maxFailedItems": null,
+        "maxFailedItemsPerBatch": null,
+        "configuration": {
+            "dataToExtract": "contentAndMetadata",
+            "imageAction": "none",
+            "parsingMode": "default",
+            "indexedFileNameExtensions": ".pdf"
+        }
+    },
+    "fieldMappings": [],
+    "outputFieldMappings": [],
+    "encryptionKey": null
+}

@@ -1,0 +1,146 @@
+{
+    "name": "nureg-section-3-2-skillset",
+    "description": "Skillset for Nureg data source for ingesting Chapter 3.2",
+    "skills": [
+        {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "uri": "https://<webAppName>.azurewebsites.us/search/nureg/sections:generate",
+            "description": "This skill calls an Azure web app, which in turn calls custom code",
+            "timeout": "PT3M50S",
+            "inputs": [
+                {
+                    "name": "path",
+                    "source": "/document/metadata_storage_path"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "sections",
+                    "targetName": "sections"
+                }
+            ]
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+            "name": "descriptionEmbedding",
+            "description": "Generates embeddings for the text from a deployed embedding model.",
+            "context": "/document/sections/*",
+            "resourceUri": "<openaiResourceUri>",
+            "apiKey": "<openaiApiKey>",
+            "deploymentId": "<openaiAdaLargeDeploymentId>",
+            "dimensions": 3072,
+            "modelName": "text-embedding-3-large",
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/sections/*/description",
+                    "inputs": []
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "embedding",
+                    "targetName": "descriptionVector"
+                }
+            ]
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+            "name": "discussionEmbedding",
+            "description": "Generates embeddings for the text from a deployed embedding model.",
+            "context": "/document/sections/*",
+            "resourceUri": "<openaiResourceUri>",
+            "apiKey": "<openaiApiKey>",
+            "deploymentId": "<openaiAdaLargeDeploymentId>",
+            "dimensions": 3072,
+            "modelName": "text-embedding-3-large",
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/sections/*/discussion",
+                    "inputs": []
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "embedding",
+                    "targetName": "discussionVector"
+                }
+            ]
+        }
+    ],
+    "indexProjections": {
+        "selectors": [
+            {
+                "targetIndexName": "nureg-section-3-2-index",
+                "parentKeyFieldName": "parent_id",
+                "sourceContext": "/document/sections/*",
+                "mappings": [
+                    {
+                        "name": "section",
+                        "source": "/document/sections/*/section",
+                        "inputs": []
+                    },
+                    {
+                        "name": "lxxii",
+                        "source": "/document/sections/*/lxxii",
+                        "inputs": []
+                    },
+                    {
+                        "name": "lxxiii",
+                        "source": "/document/sections/*/lxxiii",
+                        "inputs": []
+                    },
+                    {
+                        "name": "description",
+                        "source": "/document/sections/*/description",
+                        "inputs": []
+                    },
+                    {
+                        "name": "descriptionVector",
+                        "source": "/document/sections/*/descriptionVector",
+                        "inputs": []
+                    },
+                    {
+                        "name": "discussion",
+                        "source": "/document/sections/*/discussion",
+                        "inputs": []
+                    },
+                    {
+                        "name": "discussionVector",
+                        "source": "/document/sections/*/discussionVector",
+                        "inputs": []
+                    },
+                    {
+                        "name": "examples",
+                        "source": "/document/sections/*/examples",
+                        "inputs": []
+                    },
+                    {
+                        "name": "storageAccountName",
+                        "source": "/document/sections/*/storageAccountName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "containerName",
+                        "source": "/document/sections/*/containerName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "blobName",
+                        "source": "/document/sections/*/blobName",
+                        "inputs": []
+                    },
+                    {
+                        "name": "pageNumber",
+                        "source": "/document/sections/*/pageNumber",
+                        "inputs": []
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "projectionMode": "skipIndexingParentDocuments"
+        }
+    }
+}

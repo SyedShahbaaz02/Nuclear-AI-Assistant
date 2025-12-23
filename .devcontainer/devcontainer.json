@@ -1,0 +1,62 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "Python 3",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/azure-cli:1": {
+            "installBicep": true,
+            "installUsingPython": true,
+            "version": "latest",
+            "bicepVersion": "latest"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers-community/npm-features/typescript:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [7071, 18889], // Web App, Aspire Dashboard
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "pip3 install --user -r requirements.txt && pre-commit install",
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "DavidAnson.vscode-markdownlint",
+                "eamodio.gitlens",
+                "EditorConfig.EditorConfig",
+                "github.copilot",
+                "github.copilot-chat",
+                "hediet.vscode-drawio",
+                "humao.rest-client",
+                "mechatroner.rainbow-csv",
+                "ms-azuretools.azure-dev",
+                "ms-azuretools.vscode-containers",
+                "ms-azuretools.vscode-bicep",
+                "ms-python.flake8",
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-vscode.azurecli",
+                "typespec.typespec-vscode",
+                "mermaidchart.vscode-mermaid-chart",
+                "ms-vscode.vscode-node-azure-pack"
+            ]
+        }
+    }
+    // Uncomment the next section if you are using WSL2 and SSH with git. This will allow your private key to be
+    // accessed by the SSH client within the dev container for connection to the remote repository. Once this
+    // section is uncommented reload the dev container. Once the dev container is reloaded re-comment this section.
+    // NOTE: DO NOT COMMIT THIS FILE WITH THIS SECTION UNCOMMENTED!!!!
+    // , "mounts": [
+    //     "type=bind,source=/home/${localEnv:USER}/.ssh/id_rsa,target=/home/vscode/.ssh/id_rsa,readonly",
+    //     "type=bind,source=/home/${localEnv:USER}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,readonly"
+    // ]
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // , "remoteUser": "root"
+}

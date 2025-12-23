@@ -1,0 +1,23 @@
+{
+    "name": "keyphrase-experiment-reportability-manual-indexer",
+    "description": null,
+    "dataSourceName": "reportability-manual-datasource",
+    "skillsetName": "keyphrase-experiment-reportability-manual-skillset",
+    "targetIndexName": "keyphrase-experiment-reportability-manual-index",
+    "disabled": null,
+    "schedule": null,
+    "parameters": {
+        "batchSize": null,
+        "maxFailedItems": null,
+        "maxFailedItemsPerBatch": null,
+        "configuration": {
+            "dataToExtract": "contentAndMetadata",
+            "imageAction": "none",
+            "parsingMode": "default",
+            "indexedFileNameExtensions": ".pdf"
+        }
+    },
+    "fieldMappings": [],
+    "outputFieldMappings": [],
+    "encryptionKey": null
+}

@@ -1,0 +1,25 @@
+curl -X POST http://localhost:7071/chat/stream?orchestrationType=sequential \
+-H "Content-Type: application/json" \
+--no-buffer \
+-d '{
+    "messages": [
+        {
+            "role": "user",
+            "content": "On January 3, 2022, with the Unit 2 reactor operating at 100 percent power, a severe weather induced phase-to- ground fault occurred on a transformer feeder breaker [BKR] from the 500-kilovolt switchyard Red Bus [BU] 'B' phase, causing an electrical transient that affected frequency of the bus and Unit 2 main turbine speed. At that time, the megawatt transducers installed in the megawatt transducer circuit for the Unit 2 main turbine Ovation control system were configured to activate the Load Drop Anticipator (LDA) function of the system if main turbine speed reached 1809 revolutions per minute (RPM) with the reactor at 100 percent power. The correct configuration of the megawatt transducer circuit should activate the LDA function of the system if main turbine speed reaches 1809 RPM at zero percent reactor power and if main turbine speed reaches 1854 RPM at 100 percent reactor power. As a result of the transient on January 3, 2022, Unit 2 main turbine speed increased above 1809 RPM to 1810 RPM and initiated the Load Drop Anticipator (LDA) function in the main turbine Ovation controls. Once the LDA was latched, the turbine control valves [FCV] and intercept valves [V] were forced shut to prevent a possible turbine overspeed condition. With the valves traveling closed, reactor coolant system (RCS) [AB] pressure began to rise, resulting in an automatic Unit 2 reactor trip on high RCS pressure."
+        }
+    ],
+    "context": {
+        "user": {
+            "id": "user-id-anon-001",
+            "displayName": "User Anonymous",
+            "upn": "user.anon@example.com",
+            "employeeId": "anon-001",
+            "mail": "user.anon@example.com"
+        },
+        "facility": ["ABC","123"],
+        "sourceSystem": "Ask Licensing"
+    },
+    "sessionState": "fake-session-1234-5678-9012-abcdef"
+}' 2>/dev/null | while read -r line; do
+    printf "%s" "$(echo "$line" | grep -o '"delta":{[^}]*}' | sed -E 's/.*"content":"([^"]*)".*/\1/')"
+done

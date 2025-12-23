@@ -1,0 +1,117 @@
+NOTE: Feature set contains mainly five features. "Condition Description", "Immediate Action Taken", "Recommmended Action",
+and "Initial Screening" are extracted from "Content" (Description Notes from database) and  "ORIGIN_FACILITY". Below we apply
+cleaning (like removing stop works, numbers, etc) or not and then generate embeddings. Below are the experiment variations
+and their results.
+
+
+# No Cleaning - Remove "Initial Screening" & "Recommended Action" and "Facility" features
+# ================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.87
+# Precision: 0.9121621621621622
+# Recall: 0.7780979827089337
+# F1 Score: 0.84
+# Confusion Matrix: TP -> 270, FN -> 77, FP -> 26, TN -> 427
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.78
+# Precision: 0.77
+# Recall: 0.70
+# F1 Score: 0.73
+# Confusion Matrix: TP -> 62, FN -> 26, FP -> 19, TN -> 93
+###################################################################################################
+
+# No Cleaning - Remove "Initial Screening" & "Recommended Action".
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.85
+# Precision: 0.9110320284697508
+# Recall: 0.7377521613832853
+# F1 Score: 0.82
+# Confusion Matrix: TP -> 256, FN -> 91, FP -> 25, TN -> 428
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.81
+# Precision: 0.85
+# Recall: 0.68
+# F1 Score: 0.75
+# Confusion Matrix: TP -> 60, FN -> 28, FP -> 11, TN -> 101
+###################################################################################################
+
+# No Cleaning - Remove "Initial Screening".
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.89
+# Precision: 0.9253246753246753
+# Recall: 0.8096590909090909
+# F1 Score: 0.86
+# Confusion Matrix: TP -> 285, FN -> 67, FP -> 23, TN -> 423
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.73
+# Precision: 0.71
+# Recall: 0.60
+# F1 Score: 0.65
+# Confusion Matrix: TP -> 50, FN -> 33, FP -> 20, TN -> 97
+###################################################################################################
+
+# No Cleaning - Remove "Recommended Action".
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.87
+# Precision: 0.9490909090909091
+# Recall: 0.7414772727272727
+# F1 Score: 0.83
+# Confusion Matrix: TP -> 261, FN -> 91, FP -> 14, TN -> 433
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.82
+# Precision: 0.84
+# Recall: 0.71
+# F1 Score: 0.77
+# Confusion Matrix: TP -> 59, FN -> 24, FP -> 11, TN -> 106
+###################################################################################################
+
+# Cleaning - Remove "Recommended Action".
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.88
+# Precision: 0.9496402877697842
+# Recall: 0.760806916426513
+# F1 Score: 0.84
+# Confusion Matrix: TP -> 264, FN -> 83, FP -> 14, TN -> 439
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.80
+# Precision: 0.86
+# Recall: 0.65
+# F1 Score: 0.74
+# Confusion Matrix: TP -> 57, FN -> 31, FP -> 9, TN -> 103
+###################################################################################################
+
+# Cleaning - All features
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.85
+# Precision: 0.937984496124031
+# Recall: 0.6974063400576369
+# F1 Score: 0.80
+# Confusion Matrix: TP -> 242, FN -> 105, FP -> 16, TN -> 437
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.79
+# Precision: 0.84
+# Recall: 0.64
+# F1 Score: 0.72
+# Confusion Matrix: TP -> 56, FN -> 32, FP -> 11, TN -> 101
+###################################################################################################
+
+# No Cleaning - All features
+# =================================================================================================
+# --------------- TRAIN SCORES ------------------
+# Accuracy: 0.87
+# Precision: 0.9312714776632303
+# Recall: 0.7698863636363636
+# F1 Score: 0.84
+# Confusion Matrix: TP -> 271, FN -> 81, FP -> 20, TN -> 427
+# --------------- TEST SCORES ------------------
+# Accuracy: 0.78
+# Precision: 0.75
+# Recall: 0.70
+# F1 Score: 0.72
+# Confusion Matrix: TP -> 58, FN -> 25, FP -> 19, TN -> 98
+###################################################################################################

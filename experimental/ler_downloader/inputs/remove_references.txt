@@ -1,0 +1,5 @@
+You are going to receive an excerpt text from a report to the Nuclear Regulation Commission (NRC) containing a
+detailed description of an incident.
+You need to remove any references to any section of the CFR code under which the incident is reported, especially
+relating to 10 CFR 50.73.
+The output should consist of the updated description only, without any further changes.

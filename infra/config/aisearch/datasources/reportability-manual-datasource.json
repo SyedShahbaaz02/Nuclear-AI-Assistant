@@ -1,0 +1,17 @@
+{
+    "name": "reportability-manual-datasource",
+    "description": "Data source contains reportability manual document with extracted fields including section number, page number, 10 CFR 50.72 subsections, 10 CFR 50.73 subsections, required notifications, required written reports, discussion text, and discussion vector embeddings.",
+    "type": "azureblob",
+    "subtype": null,
+    "credentials": {
+        "connectionString": "<connectionString>"
+    },
+    "container": {
+        "name": "eci",
+        "query": "reportability_guide"
+    },
+    "dataChangeDetectionPolicy": null,
+    "dataDeletionDetectionPolicy": null,
+    "encryptionKey": null,
+    "identity": null
+}

@@ -1,0 +1,53 @@
+pattern = r"Condition Description:\s*(.*?)(?=\s*(Immediate actions taken|Recommended Actions):|$)"
+
+--------------- TRAIN SCORES ------------------
+Accuracy: 0.88
+Precision: 0.946236559139785
+Recall: 0.760806916426513
+F1 Score: 0.84
+Confusion Matrix: TP -> 264, FN -> 83, FP -> 15, TN -> 438
+--------------- TEST SCORES ------------------
+Accuracy: 0.78
+Precision: 0.81
+Recall: 0.66
+F1 Score: 0.72
+Confusion Matrix: TP -> 58, FN -> 30, FP -> 14, TN -> 98
+
+
+
+pattern = r"Condition Description:\s*(.*?)(?=\s*(Reviewed by|Reviewer Comments):|$)"
+
+--------------- TRAIN SCORES ------------------
+Accuracy: 0.91
+Precision: 0.948051948051948
+Recall: 0.8414985590778098
+F1 Score: 0.89
+Confusion Matrix: TP -> 292, FN -> 55, FP -> 16, TN -> 437
+--------------- TEST SCORES ------------------
+Accuracy: 0.81
+Precision: 0.81
+Recall: 0.75
+F1 Score: 0.78
+Confusion Matrix: TP -> 66, FN -> 22, FP -> 15, TN -> 97
+
+
+
+pattern1 = r"Condition Description:\s*(.*?)(?=\s*(Immediate actions taken|Recommended Actions):|$)"
+pattern2 = r"Immediate actions taken:\s*(.*?)(?=\s*(Recommended Actions|Initial Screening Questions):|$)"
+pattern3 = r"Recommended Actions:\s*(.*?)(?=\s*(Initial Screening Questions|Operable Basis):|$)"
+pattern4 = r"Initial Screening Questions:\s*(.*?)(?=\s*(Operable Basis|Reportable Basis):|$)"
+
+--------------- TRAIN SCORES ------------------
+Accuracy: 0.87
+Precision: 0.9763779527559056
+Recall: 0.7146974063400576
+F1 Score: 0.83
+Confusion Matrix: TP -> 248, FN -> 99, FP -> 6, TN -> 447
+--------------- TEST SCORES ------------------
+Accuracy: 0.83
+Precision: 0.91
+Recall: 0.68
+F1 Score: 0.78
+Confusion Matrix: TP -> 60, FN -> 28, FP -> 6, TN -> 106
+
+

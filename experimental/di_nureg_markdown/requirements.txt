@@ -1,0 +1,5 @@
+python-dotenv==0.21.0
+azure-core==1.33.0
+azure-ai-documentintelligence==1.0.2
+azure-identity==1.21.0
+dotenv==0.9.9

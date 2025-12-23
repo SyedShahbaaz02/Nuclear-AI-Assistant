@@ -1,0 +1,13 @@
+POST http://localhost:7071/search/nureg/sections:generate HTTP/1.1
+content-type: application/json
+
+{
+    "values": [
+        {
+            "recordId": "1",
+            "data": {
+                "path": "https://czvgnalcs00dsta001.blob.core.usgovcloudapi.net/non-eci/nureg/ML13032A220.pdf"
+            }
+        }
+    ]
+}

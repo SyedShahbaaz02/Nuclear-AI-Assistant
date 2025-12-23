@@ -1,0 +1,15 @@
+{
+    "debug.internalConsoleOptions": "neverOpen",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "editor.rulers": [
+        {
+            "column": 120,
+            "color": "#00FF00"
+        }
+    ],
+    "python.testing.cwd": "src/web_api/tests",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python-envs.pythonProjects": []
+}

@@ -1,0 +1,257 @@
+{
+    "name": "keyphrase-experiment-reportability-manual-index",
+    "fields": [
+        {
+            "name": "id",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": true,
+            "analyzer": "keyword",
+            "synonymMaps": []
+        },
+        {
+            "name": "parent_id",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "sectionName",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "references",
+            "type": "Collection(Edm.String)",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "referenceContent",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "requiredNotifications",
+            "type": "Collection(Edm.ComplexType)",
+            "synonymMaps": [],
+            "fields": [
+                {
+                    "name": "timeLimit",
+                    "type": "Edm.String",
+                    "searchable": false,
+                    "filterable": false,
+                    "retrievable": true,
+                    "stored": true,
+                    "sortable": false,
+                    "facetable": false,
+                    "key": false,
+                    "synonymMaps": []
+                },
+                {
+                    "name": "notification",
+                    "type": "Edm.String",
+                    "searchable": false,
+                    "filterable": false,
+                    "retrievable": true,
+                    "stored": true,
+                    "sortable": false,
+                    "facetable": false,
+                    "key": false,
+                    "synonymMaps": []
+                }
+            ]
+        },
+        {
+            "name": "requiredWrittenReports",
+            "type": "Collection(Edm.ComplexType)",
+            "synonymMaps": [],
+            "fields": [
+                {
+                    "name": "timeLimit",
+                    "type": "Edm.String",
+                    "searchable": false,
+                    "filterable": false,
+                    "retrievable": true,
+                    "stored": true,
+                    "sortable": false,
+                    "facetable": false,
+                    "key": false,
+                    "synonymMaps": []
+                },
+                {
+                    "name": "notification",
+                    "type": "Edm.String",
+                    "searchable": false,
+                    "filterable": false,
+                    "retrievable": true,
+                    "stored": true,
+                    "sortable": false,
+                    "facetable": false,
+                    "key": false,
+                    "synonymMaps": []
+                }
+            ]
+        },
+        {
+            "name": "discussion",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "discussionVector",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "dimensions": 3072,
+            "vectorSearchProfile": "azure-open-ai-profile",
+            "synonymMaps": []
+        },
+        {
+            "name": "storageAccountName",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "containerName",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "blobName",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "pageNumber",
+            "type": "Edm.Int32",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+        },
+        {
+            "name": "discussionKeyPhrases",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false
+        }
+    ],
+    "scoringProfiles": [],
+    "suggesters": [],
+    "analyzers": [],
+    "normalizers": [],
+    "tokenizers": [],
+    "tokenFilters": [],
+    "charFilters": [],
+    "similarity": {
+        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+    },
+    "vectorSearch": {
+        "algorithms": [
+            {
+                "name": "hnsw",
+                "kind": "hnsw",
+                "hnswParameters": {
+                    "metric": "cosine",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                }
+            }
+        ],
+        "profiles": [
+            {
+                "name": "azure-open-ai-profile",
+                "algorithm": "hnsw",
+                "vectorizer": "azure-openai-ada-vectorizer"
+            }
+        ],
+        "vectorizers": [
+            {
+                "name": "azure-openai-ada-vectorizer",
+                "kind": "azureOpenAI",
+                "azureOpenAIParameters": {
+                    "resourceUri": "<openaiResourceUri>",
+                    "deploymentId": "<openaiAdaLargeDeploymentId>",
+                    "apiKey": "<openaiApiKey>",
+                    "modelName": "text-embedding-3-large"
+                }
+            }
+        ],
+        "compressions": []
+    }
+}

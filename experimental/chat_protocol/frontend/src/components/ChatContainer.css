@@ -1,0 +1,15 @@
+@import './Form.css';
+
+.message-list {
+  height: 44vh;
+  overflow: auto;
+  border-bottom: solid;
+  border-width: 1px;
+  flex-direction: column-reverse;
+}
+
+.log {
+  height: 40vh;
+  overflow: auto;
+  flex-direction: column-reverse;
+}

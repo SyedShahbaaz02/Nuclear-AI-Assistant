@@ -1,0 +1,15 @@
+.log-entry-container {
+    font-size: small;
+}
+
+.log-entry-container.info {
+    color: green;
+}
+
+.log-entry-container.warning {
+    color: rgb(184, 167, 18);
+}
+
+.log-entry-container.error {
+    color: rgb(206, 24, 24);
+}

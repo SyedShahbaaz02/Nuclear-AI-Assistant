@@ -1,0 +1,23 @@
+{
+    "name": "keyphrase-experiment-nureg-section-3-2-indexer",
+    "description": null,
+    "dataSourceName": "nureg-datasource",
+    "skillsetName": "keyphrase-experiment-nureg-section-3-2-skillset",
+    "targetIndexName": "keyphrase-experiment-nureg-section-3-2-index",
+    "disabled": null,
+    "schedule": null,
+    "parameters": {
+        "batchSize": null,
+        "maxFailedItems": null,
+        "maxFailedItemsPerBatch": null,
+        "configuration": {
+            "dataToExtract": "contentAndMetadata",
+            "imageAction": "none",
+            "parsingMode": "default",
+            "indexedFileNameExtensions": ".pdf"
+        }
+    },
+    "fieldMappings": [],
+    "outputFieldMappings": [],
+    "encryptionKey": null
+}
