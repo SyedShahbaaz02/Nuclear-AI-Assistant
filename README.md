@@ -403,7 +403,7 @@ data: [DONE]
 
 ### Chat Interaction
 ![Chat Interface](images/asklicensing-chat.png)
-*Real-time AI-powered responses with regulatory citations (Part 71 requirements example)*
+*Real-time AI-powered responses with regulatory citations*
 
 The interface provides:
 -  Natural language query input
