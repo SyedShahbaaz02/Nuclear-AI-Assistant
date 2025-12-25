@@ -395,16 +395,6 @@ data: [DONE]
 ---
 ---
 
-## 🖼️ User Interface
-
-### Landing Page
-![AskLicensing Interface](images/asklicensing-home.png)
-*Clean, intuitive interface for regulatory queries*
-
-### Chat Interaction
-![Chat Interface](images/asklicensing-chat.png)
-*Real-time AI-powered responses with regulatory citations*
-
 The interface provides:
 -  Natural language query input
 -  Streaming AI responses
